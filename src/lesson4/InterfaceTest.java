@@ -11,6 +11,10 @@ public abstract class InterfaceTest implements Total, Empty {
 		
 	}
 	
+	public void myNewMethod() {
+		// kdfklsdj
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		InterfaceTest	it = new ChildInterfaceTest();
@@ -26,6 +30,10 @@ public abstract class InterfaceTest implements Total, Empty {
 /* abstract*/ interface MyInterface {
 	/*public abstract*/ void myMethod();
 	void a();
+	
+	default void abcde() {	// 1.8
+		System.err.println();
+	}
 }
 
 /* abstract*/ interface MyInterface2 {
@@ -70,6 +78,11 @@ class ChildInterfaceTest extends InterfaceTest {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void abcde() {	// 1.8
+		System.err.println();
+	}
+
 }
 
 
@@ -83,5 +96,7 @@ class ZZZ {
 }
 
 class ZZZ1 extends ZZZ implements MyInterface {
-	
+	public void abcde() {	// 1.8
+		System.err.println();
+	}
 }
