@@ -2,8 +2,10 @@ package lesson6;
 
 import java.util.Arrays;
 
+@MyAnnotation(/*value=*/"12345")
 public class SpecialClassesTest {
 	static int	x = 10;
+	@MyAnnotation(value="234566")
 	int			y = 20;
 
 	void abcde(/*this*/) {
@@ -54,8 +56,58 @@ public class SpecialClassesTest {
 		System.err.println("MI Name="+miClass.getName());
 		System.err.println("MI Constructors="+Arrays.toString(miClass.getDeclaredConstructors()));
 		System.err.println("MI Fields="+Arrays.toString(miClass.getDeclaredFields()));
+		
+		Enum	d = DayOfWeek.SATURDAY;
+		
+		if (d == DayOfWeek.SATURDAY) {
+			System.err.println("Equals");
+		}
+		switch ((DayOfWeek)d) {		// switch (d.ordinal()) {
+			case /*5*/FRIDAY:	// case FRIDAY.ordinal() -> 5
+				break;
+			case /*1*/MONDAY:	// case MONDAY.ordinal() -> 1
+				break;
+			case SATURDAY:
+				break;
+			case SUNDAY:
+				break;
+			case THURSDAY:
+				break;
+			case TUESDAY:
+				break;
+			case WEDNESDAY:
+				break;
+			default:
+				break;
+		}
+		
+		Class	sct = SpecialClassesTest.class;
+		
+		System.err.println("Methods: "+Arrays.toString(sct.getDeclaredMethods()));
+		System.err.println("Annotations: "+Arrays.toString(sct.getAnnotations()));
+		System.err.println("Value: "+((MyAnnotation)sct.getAnnotation(MyAnnotation.class)).value());
+		
+		call(new MyImplementation());
+		call(new MyInterface() {
+			@Override
+			public void process() {
+				System.err.println("Process anon");
+			}
+		});
+		call(/*SpecialClassesTest::lambda$0*/()->System.err.println("Lambda process"));
+		call(SpecialClassesTest::yyyyy);
 	}
 
+	static void yyyyy() {
+		System.err.println("My lambda");
+	}
+	
+	// private static lambda$0(){System.err.println("Lambda process");}
+	
+	static void call(MyInterface mi) {
+		mi.process();
+	}
+	
 	private class InnerClass {
 		public static final int a = 10;		// 'ConstValue'
 //		public static int w = 10;
@@ -85,13 +137,15 @@ public class SpecialClassesTest {
 	}
 }
 
+@FunctionalInterface
 interface MyInterface {
 	void process();
+	default void process2() {}
 }
 
-//class MyImplementation implements MyInterface {
-//	@Override
-//	public void process() {
-//		System.err.println("Process");
-//	}
-//}
+class MyImplementation implements MyInterface {
+	@Override
+	public void process() {
+		System.err.println("Process");
+	}
+}
