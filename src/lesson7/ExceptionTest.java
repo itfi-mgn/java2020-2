@@ -1,5 +1,7 @@
 package lesson7;
 
+import java.io.IOException;
+
 public class ExceptionTest {
 	static void error(int code) throws RuntimeException, Exception, Throwable {
 		switch (code) {
@@ -13,8 +15,10 @@ public class ExceptionTest {
 	static void nestedError(int code) throws Throwable {
 		try{
 			error(code);
+//			System.err.println("Nested finally");
 		} catch (Exception e) {
 			System.err.println("Nested catch: "+e.getMessage());
+//			System.err.println("Nested finally");
 		} finally {
 			System.err.println("Nested finally");
 		}
@@ -40,6 +44,7 @@ public class ExceptionTest {
 				System.err.println("Exception catch: "+e.getMessage());
 			} catch (Throwable e) {
 				System.err.println("Throwable catch: "+e.getMessage());
+				e.printStackTrace();
 			} finally {
 				System.err.println("Finally");
 			}
