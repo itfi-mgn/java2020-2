@@ -15,56 +15,66 @@ import java.io.Writer;
 
 public class IOTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		InputStream	is = new InputStream() {	// /dev/null
-							@Override
-							public int read() throws IOException {
-								return -1;
-							}
-						};
-		OutputStream	os = new OutputStream() {	// /dev/null
+		InputStream	is = new InputStream() {	// 	/dev/null
+						@Override
+						public int read() throws IOException {
+							return -1;	
+						}
+					};
+		OutputStream	os = new OutputStream() {	// 	/dev/null
 							@Override
 							public void write(int b) throws IOException {
 							}
-						};
-
-		// final OutputStream	os1 = new ByteArrayOutputStream();
-		try(final OutputStream	os1 = new FileOutputStream("d:/abcde.txt");//new ByteArrayOutputStream();
-			final OutputStream	os2 = new ByteArrayOutputStream();
-			final Writer		wr = new OutputStreamWriter(os1)) {	// try-with-resources
+					};
+					// Throwable->Exception->IOException	FileNotFoundException
+		// final OutputStream	os1 = new ByteArrayOutputStream()
+		try(final Duration		d = new Duration(); 
+			final OutputStream	os1 = new FileOutputStream("d:/x.txt");//new ByteArrayOutputStream();
+			final Writer		wr = new OutputStreamWriter(os1)) {	
+				// java.lang.AutoCloseable -> java.io.Closeable
 			
 //			os1.write("test string".getBytes("UTF-8"));
 //			os1.flush();
 			wr.write("test string");
 			wr.flush();
 			
-			try(final InputStream	is1 = new FileInputStream("d:/abcde.txt");//new ByteArrayInputStream(((ByteArrayOutputStream)os1).toByteArray());
+			try(final InputStream	is1 = new FileInputStream("d:/x.txt");//new ByteArrayInputStream(((ByteArrayOutputStream)os1).toByteArray());
 				final Reader		rdr = new InputStreamReader(is1);
 				final BufferedReader	brdr = new BufferedReader(rdr)) {
-//				final byte[]		buffer = new byte[100];
-//				int					len;
+//				byte[]	buffer = new byte[100];
+//				int		readed;
 //				
-//				while ((len = is1.read(buffer)) >= 0) {
-//					System.err.println(new String(buffer,0,len,"UTF-8"));
+//				while ((readed = is1.read(buffer)) >= 0) {
+//					System.err.println("Readed: "+new String(buffer,0,readed,"UTF-8"));
 //				}
-//				final char[]		buffer = new char[100];
-//				int					len;
+//				char[]	buffer = new char[100];
+//				int		readed;
 //				
-//				while ((len = rdr.read(buffer)) >= 0) {
-//					System.err.println(new String(buffer,0,len));
+//				while ((readed = rdr.read(buffer)) >= 0) {
+//					System.err.println("Readed: "+new String(buffer,0,readed));
 //				}
-				System.err.println("Line="+brdr.readLine());
+				String	line;
+				
+				while ((line = brdr.readLine()) != null) {
+					System.err.println("Line="+line);
+				}
 			}
-			
-		} catch (IOException e) {	// Throwable->Exception->IOException  FileNotFoundException
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		// finally {
-		//    os2.close();
-		//    os1.close();
-		// }
+		//	  os1.close();
+		//	  d.close();
+		//	}
 	}
+}
 
+
+class Duration implements AutoCloseable {
+	private final long	startTime = System.currentTimeMillis();
+
+	@Override
+	public void close() throws RuntimeException {
+		System.err.println("Duration="+(System.currentTimeMillis()-startTime));
+	}
 }
