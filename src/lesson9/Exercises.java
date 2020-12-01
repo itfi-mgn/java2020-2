@@ -1,5 +1,14 @@
 package lesson9;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+
 public class Exercises {
 
 	public static void main(String[] args) {
@@ -11,6 +20,7 @@ public class Exercises {
 		// 2. Read content and calculate total salary
 		// String.split(...)
 		// Integer.valueOf(...)
-	}
 
+		
+	}
 }
