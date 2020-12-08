@@ -13,5 +13,13 @@ public class Exercises {
 		//    vasechkin,10000
 		//    kim,30000
 		//    tsoy,40000
+		
+		//  - part 3	d:/testnew.zip
+		//    ivanov,20000
+		//    petroff,25000
+		//    sidoroff,10000
+		//    vasechkin,10000
+		//    kim,30000
+		//    tsoy,40000
 	}
 }
