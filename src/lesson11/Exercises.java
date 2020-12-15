@@ -11,7 +11,8 @@ public class Exercises {
 		Human[]		list2 = {new Human("Sidorov","Sidor","Sidorovich",23)
 							};
 		
-		// 1. Create ZIP d:/temp.zip and store lis1 into 'subdivision1', list2 into 'subdivision2'
+		// 1. Create ZIP d:/temp.zip and store list1 into 'subdivision1', list2 into 'subdivision2'
+		// 2. REad and print archive content
 	}
 
 }
