@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/eclipse-workspace/test/gtranslateapi-1.0.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse-workspace/test/jl1.0.jar"/>
+	<classpathentry kind="lib" path="D:/eclipse-workspace/edb-jdbc18.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
