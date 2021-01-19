@@ -3,9 +3,14 @@ package lesson13;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
+import java.util.TreeMap;
 
 class Child1<Type1,Type2 extends java.lang.Number> extends CollectionTest<Type1,Type2> {
 	
@@ -87,6 +92,40 @@ public class CollectionTest<Type1,Type2 extends java.lang.Number> {
 		System.err.println("COntent: "+set);
 		set.removeAll(Arrays.asList("petya","tanya"));	// a - b
 		System.err.println("COntent: "+set);
+		
+		Map<String,Integer>		map = new HashMap<>();
+		
+		map.put("ivanov", 21);	// .add(...)  .set(...)
+		map.put("petrov", 23);
+		map.putIfAbsent("sidoroff", 20);
+		
+		Integer	val = map.remove("sidoroff");
+		
+		System.err.println("GEt: "+map.get("petrov"));
+		
+		for (Entry<String, Integer> item : map.entrySet()) {
+			System.err.println(item.getKey()+"="+item.getValue());
+		}
+		
+		System.err.println("COntains: "+map.containsKey("ivanov"));
+		
+		TreeMap<String,Integer> tm = new TreeMap<>();
+		
+		Properties		prop = new Properties();	// Map<String,String>
+		
+		// # comment
+		// key1=value1
+		// key2=value2
+		
+//		prop.load(inStream);
+//		prop.store(out, comments);
+		
+//		prop.getProperty("key")->"string"
+//		prop.setProperty("key","value");
+//		prop.getProperty("key","defaultValue");
+
+//		System.getProperties();
+		
 	}
 
 }
